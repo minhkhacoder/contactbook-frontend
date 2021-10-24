@@ -1,45 +1,41 @@
 <template>
     <Form
-        @submit="$emit('contact-submit', contactLocal)" 
+        @submit="$emit('contact-submit',this.contact)" 
         :validation-schema="schema"
     >
-        <div class="form-group">
+        <div class="form-group col-md-6">
             <label for="name">Tên</label>
             <Field
                 name="name"
                 type="text"
                 class="form-control"
-                v-model="contactLocal.name"
             />
             <ErrorMessage name="name" class="error-feedback" />
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-6">
             <label for="email">E-mail</label>
             <Field
                 name="email"
                 type="email"
                 class="form-control"
-                v-model="contactLocal.email"
             />
             <ErrorMessage name="email" class="error-feedback" />
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-6">
             <label for="address">Địa chỉ</label>
             <Field
                 name="address"
                 type="text"
                 class="form-control"
-                v-model="contactLocal.address"
             />
             <ErrorMessage name="address" class="error-feedback" />
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-6">
             <label for="phone">Điện thoại</label>
             <Field
                 name="phone"
                 type="tel"
                 class="form-control"
-                v-model="contactLocal.phone"
             />
             <ErrorMessage name="phone" class="error-feedback" />
         </div>
@@ -49,7 +45,6 @@
                 name="favorite"
                 type="checkbox"
                 class="form-check-input"
-                v-model="contactLocal.favorite"
             />
             <label for="favorite" class="form-check-label">
                 <strong>Liên hệ yêu thích</strong>
@@ -59,13 +54,12 @@
             <button 
                 type="button"
                 class="btn btn-primary"
-                @click="$emit('contact-submit', contactLocal)"
+                @click="$emit('contact-submit', this.contact)"
             >Lưu</button>
             <button
                 type="button"
-                v-if="contactLocal.id"
                 class="ml-2 btn btn-danger"
-                @click="$emit('contact-delete', contactLocal.id)"
+                @click="$emit('contact-delete',)"
             >
                 Xóa
             </button>
@@ -79,7 +73,7 @@
 
     export default {
 
-        name: "ContactForm", 
+        name: "ContactFormAdd", 
         components: { 
             Form, 
             Field, 
@@ -107,7 +101,6 @@
                         ),
             });
             return { 
-                contactLocal: this.contact, 
                 schema, 
             };
         },

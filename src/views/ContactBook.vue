@@ -108,7 +108,7 @@
             },
             goToAddContact() { 
                 /* Chuyển trang đến /add (route /add sẽ được định nghĩa sau) */ 
-                this.$router.push("/add"); 
+                this.$router.push("/contacts"); 
             },
             async searchName() { 
                 const [error, response] = await this.handle( 

@@ -13,7 +13,7 @@ const routes = [
     }, 
     { 
         path: "/contacts",
-        name: "AddContact", 
+        name: "ContactAdd", 
         component: () => import("../views/ContactAdd"), 
     },
 ];
