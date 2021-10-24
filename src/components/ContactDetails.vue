@@ -23,7 +23,8 @@
 <script> 
     export default { 
         name: "ContactDetails", 
-        props: ["contact"], };
+        props: ["contact"], 
+    };
 </script>
 
 

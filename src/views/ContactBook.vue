@@ -25,7 +25,7 @@
             <ul class="list-group">
                 <li
                     class="list-group-item"
-                    :class="{ active: index == activeIndex }" 
+                    :class="{ active: index == currentIndex }" 
                     v-for="(contact, index) in contacts" 
                     :key="contact.id" 
                     @click="setActiveContact(contact, index)"
@@ -46,11 +46,11 @@
             </button>
         </div>
         <div class="col-md-6">
-            <div v-if="activeContact">
+            <div v-if="currentContact">
                 <ContactDetails
-                    :contact="activeContact"
+                    :contact="currentContact"
                 /> 
-                <router-link :to="'/contacts/' + activeContact.id">
+                <router-link :to="'/contacts/' + currentContact.id">
                     <span class="badge badge-warning">Hiệu chỉnh</span>
                 </router-link>   
             </div>
@@ -59,7 +59,7 @@
 </template>
 
 <script> 
-    import ContactDetails from "../components/ContactDetails.vue";
+    import ContactDetails from "../components/ContactDetails";
     import ContactService from "../services/contact.service";
     export default { 
         name: "ContactBook", 
