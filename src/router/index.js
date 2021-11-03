@@ -1,26 +1,53 @@
 import { createWebHistory, createRouter } from 'vue-router';
+import store from "../store";
 
-const routes = [ 
-    { 
-        path: "/", alias: "/contactbook", 
-        name: "ContactBook", 
-        component: () => import("../views/ContactBook"), 
+const routes = [
+    {
+        path: "/login",
+        name: "Login",
+        component: () => import("../views/UserLogin.vue"),
     },
-    { 
+    {
+        path: "/register",
+        name: "Register",
+        component: () => import("../views/UserRegister.vue"),
+    },
+    {
+        path: "/profile",
+        name: "Profile",
+        component: () => import("../views/UserProfile.vue"),
+    },
+    {
+        path: "/", alias: "/contactbook",
+        name: "ContactBook",
+        component: () => import("../views/ContactBook"),
+    },
+    {
         path: "/contacts/:id",
-        name: "EditContact", 
-        component: () => import("../views/ContactEdit"), 
-    }, 
-    { 
+        name: "EditContact",
+        component: () => import("../views/ContactEdit"),
+    },
+    {
         path: "/contacts",
-        name: "ContactAdd", 
-        component: () => import("../views/ContactAdd"), 
+        name: "ContactAdd",
+        component: () => import("../views/ContactAdd"),
     },
 ];
 
-const router = createRouter({ 
-    history: createWebHistory(), 
-    routes, 
+const router = createRouter({
+    history: createWebHistory(),
+    routes,
+});
+
+router.beforeEach((to, from, next) => {
+    const publicPages = ["/login", "/register"];
+    const authRequired = !publicPages.includes(to.path);
+    const loggedIn = store.getters.userLoggedIn;
+    if (authRequired && !loggedIn) {
+        next("/login");
+    } else {
+        next();
+    }
 });
 
 export default router;
